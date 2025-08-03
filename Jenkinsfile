@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     stages{
-        stage('VM Node Version'){
+        stage('nodejs-24.4.1'){
             steps {
                 sh '''
                     node -v
