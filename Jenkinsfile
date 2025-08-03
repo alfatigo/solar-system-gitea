@@ -2,8 +2,7 @@ pipeline{
 
     agent any
     tools {
-        nodejs 'nodejs-24.4.1',
-        Owasp-DepCheck-10
+        nodejs 'nodejs-24.4.1'
     }
     stages{
         stage('Installing Dependencies'){
