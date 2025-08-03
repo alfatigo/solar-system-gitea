@@ -27,8 +27,7 @@ pipeline {
                         --format \'ALL\'                    
                         --prettyPrint''', odcInstallation: 'Owasp-DepCheck-10'
 
-                        dependencyCheckPublisher failedTotalCritical: 1, pattern: 'dependency-check-report.xml', stopBuild: true
-
+                        dependencyCheckPublisher failedTotalCritical: 1, pattern: 'dependency-check-report', skipNoReportFiles: true
                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: './', reportFiles: 'dependency-check-report.xml', reportName: 'Dependency Check HTML Report', reportTitles: '', useWrapperFileDirectly: true])
                     }       
                 }
