@@ -22,9 +22,9 @@ pipeline{
         stage('Owasp Dependency Check'){
             steps {
                 dependencyCheck additionalArguments: '''
-                --scan \\\'./\\\'
-                --out \\\'./\\\'
-                --format \\\'ALL\\\'                    
+                --scan \'./\'
+                --out \'./\'
+                --format \'ALL\'                    
                 --prettyPrint''', odcInstallation: 'Owasp-DepCheck-10'
             }       
         }
