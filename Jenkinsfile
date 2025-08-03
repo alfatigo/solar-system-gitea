@@ -1,10 +1,10 @@
 pipeline{
     agent any
-    environment {
-        NODE_VERSION = '24.4.1'
+    tools {
+        nodejs 'nodejs-24.4.1'
     }
     stages{
-        stage('nodejs-24.4.1'){
+        stage('VM Node Version'){
             steps {
                 sh '''
                     node -v
