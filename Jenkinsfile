@@ -1,7 +1,9 @@
 pipeline{
+
     agent any
     tools {
-        nodejs 'nodejs-24.4.1'
+        nodejs 'nodejs-24.4.1',
+        Owasp-DepCheck-10 ''
     }
     stages{
         stage('Installing Dependencies'){
@@ -15,7 +17,15 @@ pipeline{
                     npm audit --audit-level=critical
                     echo $?
                 '''
-
+            }
+        }
+         stage('Owasp Dependency Check'){
+                steps {
+                    DependencyCheck additionalArguments: '''
+                    --scan \'./\'
+                    --out \'./\.
+                    --format \'ALL\'                    
+                    --prettyPrint''', odcInstallation: 'Owasp-DepCheck-10'
             }
         }
     }
