@@ -42,9 +42,6 @@ pipeline {
             }
         }
         stage('Unit Testing') {
-            options {
-                retray(2)
-            }
             steps {
 
                 withCredentials([usernamePassword(credentialsId: 'mongo-db-credentials', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
