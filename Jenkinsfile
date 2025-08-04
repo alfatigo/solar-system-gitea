@@ -10,6 +10,7 @@ pipeline {
     stages {
         stage('Installing Dependencies') {
             steps {
+                sh 'sleep 30'
                 sh 'npm install --no-audit'
             }
         }
@@ -41,14 +42,24 @@ pipeline {
             }
         }
         stage('Unit Testing') {
+            options {
+                retray(2)
+            }
             steps {
 
                 withCredentials([usernamePassword(credentialsId: 'mongo-db-credentials', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
                         sh 'npm test'
                     }
 
-                junit allowEmptyResults: true, keepProperties: true, testResults: 'test-results.xml'
+                junit allowEmptyResults: true, stdioRetention: '', testResults: 'test-results.xml'
                  
+            }
+        }
+            stage('Code Coverage') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'mongo-db-credentials', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
+                    sh 'npm run coverage'
+                }                 
             }
         }
     }
