@@ -11,6 +11,7 @@ pipeline {
         stage('Installing Dependencies') {
             steps {
                 sh 'sleep 30'
+                sh 'npm audit fix'
                 sh 'npm install --no-audit'
             }
         }
